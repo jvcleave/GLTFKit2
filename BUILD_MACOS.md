@@ -10,7 +10,7 @@ Intel. This build uses the GLTFKit2 0.5.15 source at
 Add the package at the exact release and use the `GLTFKit2` product.
 
 ```swift
-.package(url: "https://github.com/jvcleave/GLTFKit2.git", exact: "0.5.15-mess.2")
+.package(url: "https://github.com/jvcleave/GLTFKit2.git", exact: "0.5.15-mess.3")
 ```
 
 For a command-line executable, add a runtime search path for the embedded
@@ -19,7 +19,8 @@ framework. With the framework beside the executable, use
 
 ## Rebuild
 
-Build with Xcode and CMake 3.30 or later.
+Build with Xcode and CMake 3.30 or later. The `0.5.15-mess.3` binary was
+built with Xcode 26.3 and Swift 6.2.4.
 
 ```sh
 Scripts/build-macos.sh

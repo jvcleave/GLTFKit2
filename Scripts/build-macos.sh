@@ -37,14 +37,22 @@ ktx_source="$build_dir/sources/KTX-Software-4.2.1"
 gltf_source="$build_dir/sources/GLTFKit2"
 macos_sdk="$(xcrun --sdk macosx --show-sdk-path)"
 
-# KTX 4.2.1 predates these newer Clang diagnostics.
+# KTX 4.2.1 predates newer Clang diagnostics. Apple Clang 17 and later
+# releases can name them differently, so only use flags that compile.
+clang="$(xcrun --sdk macosx --find clang++)"
+ktx_cxx_flags=""
+for warning in overriding-option nontrivial-memaccess nontrivial-memcall; do
+    if "$clang" -Werror=unknown-warning-option "-Wno-error=$warning" -x c++ -fsyntax-only /dev/null >/dev/null 2>&1; then
+        ktx_cxx_flags="${ktx_cxx_flags:+$ktx_cxx_flags }-Wno-error=$warning"
+    fi
+done
 cmake -S "$ktx_source" -B "$build_dir/ktx" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DCMAKE_OSX_SYSROOT="$macos_sdk" \
     '-DCMAKE_OSX_ARCHITECTURES=arm64;x86_64' \
     -DCMAKE_OSX_DEPLOYMENT_TARGET=15.6 \
-    '-DCMAKE_CXX_FLAGS=-Wno-error=overriding-option -Wno-error=nontrivial-memcall' \
+    "-DCMAKE_CXX_FLAGS=$ktx_cxx_flags" \
     -DKTX_FEATURE_STATIC_LIBRARY=ON \
     -DKTX_FEATURE_TESTS=OFF \
     -DKTX_FEATURE_TOOLS=OFF \
