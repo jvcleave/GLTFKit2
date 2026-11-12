@@ -1,7 +1,7 @@
 # macOS builds
 
 This fork packages GLTFKit2 for macOS 15.6 and later on Apple Silicon and
-Intel. The first release uses the GLTFKit2 0.5.15 source at
+Intel. This build uses the GLTFKit2 0.5.15 source at
 `e69e354c4f31ea07b7816b8cbe2ddb28e897d073` and KTX-Software 4.2.1 at
 `170e75893e3d232a2c4f241afe199256f8abb6f9`.
 
@@ -10,8 +10,12 @@ Intel. The first release uses the GLTFKit2 0.5.15 source at
 Add the package at the exact release and use the `GLTFKit2` product.
 
 ```swift
-.package(url: "https://github.com/jvcleave/GLTFKit2.git", exact: "0.5.15-mess.1")
+.package(url: "https://github.com/jvcleave/GLTFKit2.git", exact: "0.5.15-mess.2")
 ```
+
+For a command-line executable, add a runtime search path for the embedded
+framework. With the framework beside the executable, use
+`swift run -Xlinker -rpath -Xlinker @executable_path <executable>`.
 
 ## Rebuild
 

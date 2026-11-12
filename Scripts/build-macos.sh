@@ -85,6 +85,6 @@ packaged_framework="$bundle/macos-arm64_x86_64/GLTFKit2.framework"
 # Xcode removes compiled Swift modules when creating a distributable XCFramework.
 codesign --force --sign - --timestamp=none "$packaged_framework"
 codesign --verify --strict "$packaged_framework"
-ditto -c -k --keepParent "$bundle" "$archive"
+ditto -c -k --norsrc --keepParent "$bundle" "$archive"
 printf 'SwiftPM archive: %s\n' "$archive"
 swift package compute-checksum "$archive"
