@@ -9,6 +9,11 @@ This project is a spiritual successor of the [GLTFKit](https://github.com/warren
  - tries to retain all of the information from the asset file, meaning extensions and extras are available to client code even if they are unrecognized by the loader.
  - uses cgltf and JSMN internally to load the JSON portion of glTF files, which is more efficient than parsing with `NSJSONSerialization`.
 
+## macOS package
+
+This fork provides a source-built SwiftPM XCFramework for macOS 15.6 and later
+on Apple Silicon and Intel. See the [macOS build instructions](BUILD_MACOS.md).
+
 ## Usage
 
 ### Using the Framework
